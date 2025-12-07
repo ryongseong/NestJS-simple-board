@@ -4,6 +4,7 @@ import {
   Delete,
   Get,
   Param,
+  ParseIntPipe,
   Post,
   Put,
 } from '@nestjs/common';
@@ -19,22 +20,23 @@ export class BoardController {
   }
 
   @Get(':id')
-  find(@Param('id') id: number) {
-    return `find: ${id}`;
+  find(@Param('id', ParseIntPipe) id: number) {
+    console.log(typeof id);
+    return this.boardService.find(id);
   }
 
   @Post()
-  create(@Body() data: any) {
-    return 'create';
+  create(@Body() data) {
+    return this.boardService.create(data);
   }
 
   @Put(':id')
-  update(@Param('id') id: number, @Body() data: any) {
-    return `update: ${id}`;
+  update(@Param('id', ParseIntPipe) id: number, @Body() data) {
+    return this.boardService.update(id, data);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: number) {
-    return `remove: ${id}`;
+  remove(@Param('id', ParseIntPipe) id: number) {
+    return this.boardService.delete(id);
   }
 }
