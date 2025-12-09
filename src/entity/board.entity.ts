@@ -19,10 +19,6 @@ export class Board {
   @Column()
   userId: number;
 
-  @ApiProperty({ description: '게시판 이름' })
-  @Column()
-  name: string;
-
   @ApiProperty({ description: '게시판 내용' })
   @Column()
   contents: string;
