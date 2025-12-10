@@ -54,3 +54,14 @@ content-type: application/json
   "name":"fastcampusname2",
   "password": "fastcampuspassword2"
 }
+
+###
+
+# 유저 로그인
+POST http://localhost:3000/user/login
+content-type: application/json
+
+{
+  "username": "fastcampus2026",
+  "password": "fastcampuspassword2"
+}
