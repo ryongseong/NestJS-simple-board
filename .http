@@ -36,3 +36,8 @@ content-type: application/json
 
 # 게시글 삭제하기
 DELETE http://localhost:3000/board/1
+
+###
+
+# 전체 유저 불러오기
+GET http://localhost:3000/user/
