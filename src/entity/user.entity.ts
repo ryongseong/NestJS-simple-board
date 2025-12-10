@@ -25,4 +25,7 @@ export class User {
   @ApiProperty({ description: '유저가 작성한 게시판 목록' })
   @OneToMany(() => Board, (board) => board.user)
   boards: Board[];
+
+  @Column({ select: false, nullable: true, insert: false, update: false })
+  boardCount?: number;
 }
