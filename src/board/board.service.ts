@@ -81,7 +81,7 @@ export class BoardService {
       },
     });
 
-    if (!board) throw new HttpException('NotFound', HttpStatus.NOT_FOUND);
+    if (!board) throw new HttpException('NOT_FOUND', HttpStatus.NOT_FOUND);
 
     return board;
   }
@@ -91,16 +91,17 @@ export class BoardService {
     return this.boardRepository.save(board);
   }
 
-  update(id: number, data: UpdateBoardDto) {
-    const index = this.getBoardId(id);
-    if (index > -1) {
-      this.boards[index] = {
-        ...this.boards[index],
+  async update(id: number, data: UpdateBoardDto) {
+    const board = await this.boardRepository.findOneBy({ id });
+
+    if (!board) throw new HttpException('NOT_FOUND', HttpStatus.NOT_FOUND);
+
+    return this.boardRepository.update(
+      { id },
+      {
         ...data,
-      };
-      return this.boards[index];
-    }
-    return null;
+      },
+    );
   }
 
   delete(id: number) {
