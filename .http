@@ -25,11 +25,12 @@ Authorization: Bearer <ACCESS_TOKEN>
 ###
 
 # 게시글 수정하기
-PUT http://localhost:3000/board/1
+PUT http://localhost:3000/board/4
 content-type: application/json
+Authorization: Bearer <ACCESS_TOKEN>
 
 {
-  "contents": "new contents"
+  "contents": "new api"
 }
 
 ###

@@ -14,7 +14,6 @@ import {
 } from '@nestjs/common';
 import { BoardService } from './board.service';
 import { ApiTags } from '@nestjs/swagger';
-import { CreateBoardDto } from './dto/create-board.dto';
 import { UpdateBoardDto } from './dto/update-board.dto';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { UserInfo } from 'src/decorators/user-info.decorator';
@@ -49,15 +48,16 @@ export class BoardController {
   @Put(':id')
   @UseGuards(JwtAuthGuard)
   update(
+    @UserInfo() userInfo,
     @Param('id', ParseIntPipe) id: number,
     @Body(new ValidationPipe()) data: UpdateBoardDto,
   ) {
-    return this.boardService.update(id, data);
+    return this.boardService.update(userInfo.id, id, data);
   }
 
   @Delete(':id')
   @UseGuards(JwtAuthGuard)
-  remove(@Param('id', ParseIntPipe) id: number) {
-    return this.boardService.delete(id);
+  remove(@UserInfo() userInfo, @Param('id', ParseIntPipe) id: number) {
+    return this.boardService.delete(userInfo.id, id);
   }
 }

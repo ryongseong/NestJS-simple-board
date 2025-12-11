@@ -38,10 +38,13 @@ export class BoardService {
     return this.boardRepository.save(board);
   }
 
-  async update(id: number, data: UpdateBoardDto) {
+  async update(userId: number, id: number, data: UpdateBoardDto) {
     const board = await this.getBoardById(id);
 
     if (!board) throw new HttpException('NOT_FOUND', HttpStatus.NOT_FOUND);
+
+    if (userId !== board.userId)
+      throw new HttpException('UNAUTHORIZED', HttpStatus.UNAUTHORIZED);
 
     return this.boardRepository.update(
       { id },
@@ -51,10 +54,13 @@ export class BoardService {
     );
   }
 
-  async delete(id: number) {
+  async delete(userId: number, id: number) {
     const board = await this.getBoardById(id);
 
     if (!board) throw new HttpException('NOT_FOUND', HttpStatus.NOT_FOUND);
+
+    if (userId !== board.userId)
+      throw new HttpException('UNAUTHORIZED', HttpStatus.UNAUTHORIZED);
 
     return this.boardRepository.remove(board);
   }
