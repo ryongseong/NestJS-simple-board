@@ -76,3 +76,10 @@ content-type: application/json
   "username": "fastcampus2026",
   "password": "fastcampuspassword2"
 }
+
+###
+
+# 인증된 유저 정보 가져오기
+GET http://localhost:3000/me
+content-type: application/json
+Authorization: Bearer <ACCESS_TOKEN>
